@@ -3,6 +3,7 @@
 **Status:** Draft v0.1
 **Date:** 2026-04-21
 **Author:** Sanej Bandgar (@SanejBandgar)
+**License:** MIT
 **Comments:** via GitHub issues and PRs
 
 ---
@@ -27,7 +28,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 
 **Memory object**: The atomic unit of durable state under AMSP, conforming to the schema in §8.
 
-**Subject**: The entity a memory object is about — commonly a user, organization, team, agent, or entity — identified by a typed identifier.
+**Subject**: The entity a memory object is about (commonly a user, organization, team, agent, or entity), identified by a typed identifier.
 
 **Scope**: The domain of visibility and ownership governing a memory object. See §11.
 
@@ -48,9 +49,9 @@ Current agent ecosystems have standardized two interoperability layers:
 
 A third layer remains fragmented: the durable memory and state that persists across sessions, tools, agents, and vendors.
 
-The 2026 memory landscape is active. Dedicated memory infrastructure has emerged from companies like Mem0, Zep/Graphiti, Letta (stateful memory-first agents), and Supermemory. Runtime providers are shipping managed memory services. Orchestration frameworks expose their own state primitives — LangChain's Agent Protocol includes a "Store" resource for long-term memory, coupled to that protocol's agent model.
+The 2026 memory landscape is active. Dedicated memory infrastructure has emerged from companies like Mem0, Zep/Graphiti, Letta (stateful memory-first agents), and Supermemory. Runtime providers are shipping managed memory services. Orchestration frameworks expose their own state primitives. LangChain's Agent Protocol, for example, includes a "Store" resource for long-term memory, coupled to that protocol's agent model.
 
-Each of these is a valuable implementation. None of them is an open, governance-first contract that lets memory move between them. That is the distinct problem AMSP addresses.
+Each of these is a valuable implementation. None of them is an open, governance-first contract that lets memory move between them.
 
 Without a shared external contract, the ecosystem hits four concrete problems:
 
@@ -59,7 +60,7 @@ Without a shared external contract, the ecosystem hits four concrete problems:
 - **Handoff**: agents from different vendors cannot safely share durable context in coordinator patterns.
 - **Correction**: there is no standard way to contest, update, or invalidate a memory across replicas and derivatives.
 
-AMSP aims to standardize the external contract — the schema, lifecycle, scope, and governance — without prescribing how implementations store, index, or retrieve data internally.
+AMSP aims to standardize the external contract (the schema, lifecycle, scope, and governance) without prescribing how implementations store, index, or retrieve data internally.
 
 ## 5. Non-Goals
 
@@ -85,26 +86,7 @@ A conforming AMSP implementation exposes:
 
 AMSP is transport-agnostic in v0.1. Implementations MAY expose AMSP over HTTP/JSON, JSON-RPC, gRPC, or as an MCP server. The transport binding question is addressed in §17.
 
-```
-+-----------------------+       +-------------------------+
-|   Agent / Client A    | <---> |   Memory API / Router   |
-+-----------------------+       +-------------------------+
-            |                               |
-            v                               v
-+-----------------------+       +-------------------------+
-| Local Working Store   |       |  Durable Memory Store   |
-+-----------------------+       +-------------------------+
-                                            |
-                                            v
-                               +-------------------------------+
-                               | Index / Search / Embeddings   |
-                               +-------------------------------+
-                                            |
-                                            v
-                               +-------------------------------+
-                               | Policy / ACL / Audit Layer    |
-                               +-------------------------------+
-```
+![AMSP runtime architecture: an agent talks to a Memory API and Router, with a local working store agent-side and a durable memory store server-side. Retrieval and governance sit downstream as separate concerns.](./amsp-architecture-diagram.png)
 
 ## 7. Memory Classes
 
@@ -294,9 +276,9 @@ Memory objects **MUST** declare exactly one scope. The following scope classes a
 
 ### 11.1 The user-private vs user-portable distinction
 
-`user-private` and `user-portable` are deliberately separate. `user-private` describes a memory that is private to a user within a provider — the provider may index, retrieve, and govern it, but the memory is not necessarily exportable. `user-portable` describes a memory that the user owns across providers: it MUST be exportable via the `export` operation, and its `portability.portable_owner` field MUST identify the user as the owning principal.
+`user-private` and `user-portable` are deliberately separate. `user-private` describes a memory that is private to a user within a provider. The provider may index, retrieve, and govern it, but the memory is not necessarily exportable. `user-portable` describes a memory that the user owns across providers: it MUST be exportable via the `export` operation, and its `portability.portable_owner` field MUST identify the user as the owning principal.
 
-This distinction matters because it is the foundation of cross-vendor user data rights and enterprise procurement requirements around portability.
+This is the foundation of cross-vendor user data rights and enterprise procurement requirements around portability.
 
 ### 11.2 Scope enforcement
 
@@ -314,12 +296,12 @@ Every memory object **MUST** carry:
 
 Implementations **MUST** set the `provenance.method` field to one of:
 
-- `explicit` — directly provided by the user or a system of record
-- `inferred` — inferred by a model or agent from observation
-- `derived` — computed from multiple source memories (e.g., via `compact`)
-- `imported` — brought in via `import` from another AMSP-compliant system
+- `explicit`: directly provided by the user or a system of record
+- `inferred`: inferred by a model or agent from observation
+- `derived`: computed from multiple source memories (e.g., via `compact`)
+- `imported`: brought in via `import` from another AMSP-compliant system
 
-This distinction matters because `inferred` and `derived` memories generally carry weaker authority than `explicit` ones, and consuming systems SHOULD be able to weight them accordingly at retrieval time.
+`inferred` and `derived` memories generally carry weaker authority than `explicit` ones. Consuming systems SHOULD be able to weight them accordingly at retrieval time.
 
 ### 12.2 Audit and deletion
 
@@ -348,15 +330,15 @@ A conforming implementation **MUST** expose enough metadata for external retriev
 - **Status eligibility**: memories with status `deleted` MUST NOT be returned; `expired`, `superseded`, and `contested` SHOULD be suppressed by default
 - **Retention validity**: via `retention`
 
-Retrieval policy itself — ranking, token budgeting, task fit — is out of scope for v0.1. This separation is intentional: storage and selection are distinct concerns, and a protocol that collapses them loses portability.
+Retrieval policy itself (ranking, token budgeting, task fit) is out of scope for v0.1. This separation is intentional: storage and selection are distinct concerns, and a protocol that collapses them loses portability.
 
 ### 13.1 Retrieval vs. injection
 
 AMSP distinguishes three concepts:
 
-- **Stored memory** — the set of memory objects in the store
-- **Retrieved memory** — the set returned by `search` or `read` for a given query
-- **Injected context** — the subset that an agent actually places in its active context window
+- **Stored memory**: the set of memory objects in the store
+- **Retrieved memory**: the set returned by `search` or `read` for a given query
+- **Injected context**: the subset that an agent actually places in its active context window
 
 AMSP governs the first two. The third is a runtime decision left to implementations.
 
@@ -431,22 +413,18 @@ The following issues are deliberately left unresolved in v0.1, to be addressed i
 8. **Agent Protocol Store bridge**: LangChain's Agent Protocol Store solves overlapping problems. A conformance bridge may be desirable.
 9. **Enterprise-portable scope**: Should `user-portable` and a future `enterprise-portable` scope use the same export semantics, or diverge?
 
-## 18. Reference Implementation
-
-A reference implementation is planned. See the repository `reference/` directory (forthcoming).
-
-## 19. Change Log
+## 18. Change Log
 
 - **2026-04-21**: v0.1 initial public draft.
 
-## 20. References
+## 19. References
 
-- RFC 2119 — Key words for use in RFCs
-- RFC 8174 — Ambiguity of Uppercase vs Lowercase in RFC 2119
-- Model Context Protocol specification — modelcontextprotocol.io
-- Agent2Agent (A2A) Protocol — Google, 2025
-- LangChain Agent Protocol — LangChain, 2025
+- RFC 2119: Key words for use in RFCs
+- RFC 8174: Ambiguity of Uppercase vs Lowercase in RFC 2119
+- Model Context Protocol specification: modelcontextprotocol.io
+- Agent2Agent (A2A) Protocol: Google, 2025
+- LangChain Agent Protocol: LangChain, 2025
 
-## 21. Acknowledgements
+## 20. Acknowledgements
 
-This draft was developed following public exchanges on X with Harrison Chase ([@hwchase17](https://x.com/hwchase17)), Reid B. Kimball ([@ReidBKimball](https://x.com/ReidBKimball)), and others in April 2026. It was pressure-tested against the current state of agent memory frameworks (Mem0, Zep/Graphiti, Letta, Supermemory, OpenMemory, LangChain Agent Protocol) and runtime-vendor memory services.
+This draft was developed following a public exchange on X with Harrison Chase ([@hwchase17](https://x.com/hwchase17)) in April 2026.

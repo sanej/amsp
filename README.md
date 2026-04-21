@@ -1,6 +1,6 @@
 # AMSP: Agent Memory and State Protocol
 
-**Draft v0.1** — a proposed open standard for portable, governed memory and state across AI agents, orchestration frameworks, and runtime providers.
+**Draft v0.1.** A proposed open standard for portable, governed memory and state across AI agents, orchestration frameworks, and runtime providers.
 
 ---
 
@@ -16,7 +16,7 @@ That is the gap AMSP proposes to fill.
 
 ## Why This Matters
 
-Every major agent platform — OpenAI, Anthropic, Google, xAI, Meta — is building its own memory feature. Every orchestration framework is adding its own state abstraction. Every enterprise pilot is discovering that "memory" means six different things depending on who you ask.
+Every major agent platform (OpenAI, Anthropic, Google, xAI, Meta) is building its own memory feature. Every orchestration framework is adding its own state abstraction. Every enterprise pilot is discovering that "memory" means six different things depending on who you ask.
 
 The 2026 memory landscape reflects this. Dedicated memory infrastructure has emerged from Mem0, Zep/Graphiti, Letta (stateful memory-first agents), and Supermemory. Runtime providers are shipping managed memory services. LangChain's Agent Protocol exposes a "Store" primitive, coupled to that protocol's agent model. Each of these is a valuable implementation. None of them is an open, governance-first contract that lets memory move safely between them.
 
@@ -28,7 +28,7 @@ Without that contract, enterprise buyers hit the same wall repeatedly:
 - No scope model that survives a framework change
 - No way to audit what their agents have inferred about them
 
-AMSP is not another memory product. It is a proposed schema, lifecycle, and governance contract — the external surface that agent systems should agree on, regardless of how they store bytes internally.
+AMSP is not another memory product. It is a proposed schema, lifecycle, and governance contract: the external surface that agent systems should agree on, regardless of how they store bytes internally.
 
 ---
 
@@ -55,7 +55,7 @@ The analogy: MCP is to tool access what AMSP aims to be to durable state. Each p
 
 ## Stack Positioning
 
-![AMSP stack positioning — six-layer agent interoperability stack with AMSP as the missing memory and state interop layer](./amsp-stack-diagram.svg)
+![AMSP stack positioning: six-layer agent interoperability stack with AMSP as the missing memory and state interop layer](./amsp-stack-diagram.png)
 
 AMSP sits between tool and resource access (MCP) and runtime storage. MCP standardizes how agents access tools. A2A standardizes how agents talk to each other. AMSP addresses the missing layer: portable, governed state.
 
@@ -79,15 +79,17 @@ This is the same reason HTTP carries many payloads but JSON Schema, OAuth, and O
 
 ## Repository Contents
 
-- [`RFC-0001-AMSP.md`](./RFC-0001-AMSP.md) — the v0.1 specification
-- `examples/` — sample memory objects and flow diagrams (coming)
-- `reference/` — reference implementation notes (coming)
+- [`RFC-0001-AMSP.md`](./RFC-0001-AMSP.md): the v0.1 specification
+- [`amsp-stack-diagram.svg`](./amsp-stack-diagram.svg): stack positioning diagram (source)
+- [`amsp-architecture-diagram.svg`](./amsp-architecture-diagram.svg): runtime architecture diagram (source)
+
+Example memory objects, flow diagrams, and reference implementation notes will land in follow-up PRs.
 
 ---
 
 ## How to Contribute
 
-This is v0.1. The hard problems — conflict resolution, forgetting guarantees across replicas, identity continuity across providers, multi-agent co-ownership — are called out as open questions in the spec, not hand-waved past.
+This is v0.1. The hard problems (conflict resolution, forgetting guarantees across replicas, identity continuity across providers, multi-agent co-ownership) are called out as open questions in the spec, not hand-waved past.
 
 If you have thoughts:
 
@@ -99,12 +101,18 @@ If you have thoughts:
 
 ## Author
 
-Sanej Bandgar — [@SanejBandgar](https://x.com/SanejBandgar)
+Sanej Bandgar, [@SanejBandgar](https://x.com/SanejBandgar)
 
-Writing on enterprise AI strategy, capital allocation, and agentic systems.
+Enterprise AI & Agentic Systems
 
 ---
 
 ## Acknowledgements
 
-This draft emerged from a public exchange with Harrison Chase ([@hwchase17](https://x.com/hwchase17)), Reid B. Kimball ([@ReidBKimball](https://x.com/ReidBKimball)), and others on X in April 2026. The draft was pressure-tested against the current state of agent memory implementations (Mem0, Zep/Graphiti, Letta, Supermemory, OpenMemory, LangChain Agent Protocol) and runtime-vendor memory services.
+This draft emerged from a public exchange with Harrison Chase ([@hwchase17](https://x.com/hwchase17)) on X in April 2026.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
