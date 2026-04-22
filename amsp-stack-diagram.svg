@@ -1,21 +1,21 @@
 <svg width="680" height="512" viewBox="0 0 680 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Agent stack positioning of AMSP</title>
-  <desc id="desc">Six-layer agent interoperability stack. From top: application, orchestration, agent interop (A2A), tool access (MCP), memory and state interop (AMSP — highlighted), and runtime and storage. AMSP is the missing layer between tool access and runtime storage.</desc>
+  <desc id="desc">Six-layer agent interoperability stack. From top: application, orchestration, agent interop (A2A), tool access (MCP), memory and state interop (AMSP, highlighted in navy), and runtime and storage. AMSP is the missing layer between tool access and runtime storage.</desc>
 
   <style>
-    .layer-rect { fill: #F1EFE8; stroke: #5F5E5A; }
-    .layer-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #444441; }
-    .layer-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #5F5E5A; }
-    .amsp-rect { fill: #FAECE7; stroke: #993C1D; }
-    .amsp-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #712B13; }
-    .amsp-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #993C1D; }
+    .layer-rect { fill: #FFFFFF; stroke: #D4D4D0; }
+    .layer-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1F2937; }
+    .layer-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #6B7280; }
+    .amsp-rect { fill: #EEF2F8; stroke: #1E3A5F; }
+    .amsp-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1E3A5F; }
+    .amsp-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #3B5578; }
     @media (prefers-color-scheme: dark) {
-      .layer-rect { fill: #2C2C2A; stroke: #B4B2A9; }
-      .layer-title { fill: #F1EFE8; }
-      .layer-sub { fill: #D3D1C7; }
-      .amsp-rect { fill: #712B13; stroke: #F0997B; }
-      .amsp-title { fill: #FAECE7; }
-      .amsp-sub { fill: #F5C4B3; }
+      .layer-rect { fill: #1F2937; stroke: #4B5563; }
+      .layer-title { fill: #F3F4F6; }
+      .layer-sub { fill: #9CA3AF; }
+      .amsp-rect { fill: #1E3A5F; stroke: #93B4D9; }
+      .amsp-title { fill: #DBE7F3; }
+      .amsp-sub { fill: #93B4D9; }
     }
   </style>
 
@@ -29,15 +29,15 @@
 
   <rect class="layer-rect" x="40" y="180" width="600" height="72" rx="8" stroke-width="0.5"/>
   <text class="layer-title" x="340" y="206" text-anchor="middle" dominant-baseline="central">Agent interop layer</text>
-  <text class="layer-sub" x="340" y="230" text-anchor="middle" dominant-baseline="central">A2A — discover, delegate, return</text>
+  <text class="layer-sub" x="340" y="230" text-anchor="middle" dominant-baseline="central">A2A: discover, delegate, return</text>
 
   <rect class="layer-rect" x="40" y="260" width="600" height="72" rx="8" stroke-width="0.5"/>
   <text class="layer-title" x="340" y="286" text-anchor="middle" dominant-baseline="central">Tool and resource access</text>
-  <text class="layer-sub" x="340" y="310" text-anchor="middle" dominant-baseline="central">MCP — files, APIs, databases, workflows</text>
+  <text class="layer-sub" x="340" y="310" text-anchor="middle" dominant-baseline="central">MCP: files, APIs, databases, workflows</text>
 
   <rect class="amsp-rect" x="40" y="340" width="600" height="72" rx="8" stroke-width="0.5"/>
   <text class="amsp-title" x="340" y="366" text-anchor="middle" dominant-baseline="central">Memory and state interop</text>
-  <text class="amsp-sub" x="340" y="390" text-anchor="middle" dominant-baseline="central">AMSP — portable, governed state</text>
+  <text class="amsp-sub" x="340" y="390" text-anchor="middle" dominant-baseline="central">AMSP: portable, governed state</text>
 
   <rect class="layer-rect" x="40" y="420" width="600" height="72" rx="8" stroke-width="0.5"/>
   <text class="layer-title" x="340" y="446" text-anchor="middle" dominant-baseline="central">Runtime and storage</text>

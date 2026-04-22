@@ -4,35 +4,32 @@
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
     <marker id="arrow-dark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M2 1L8 5L2 9" fill="none" stroke="#B4B2A9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
   </defs>
 
   <style>
-    .box-rect { fill: #F1EFE8; stroke: #5F5E5A; }
-    .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #444441; }
-    .box-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #5F5E5A; }
-    .hub-rect { fill: #FAECE7; stroke: #993C1D; }
-    .hub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #712B13; }
-    .hub-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #993C1D; }
-    .connector { stroke: #5F5E5A; stroke-width: 1.5; fill: none; }
-    .connector-arrow { marker-end: url(#arrow); }
+    .box-rect { fill: #FFFFFF; stroke: #D4D4D0; }
+    .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1F2937; }
+    .box-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #6B7280; }
+    .hub-rect { fill: #EEF2F8; stroke: #1E3A5F; }
+    .hub-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1E3A5F; }
+    .hub-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 400; fill: #3B5578; }
+    .connector { stroke: #6B7280; stroke-width: 1.5; fill: none; }
     @media (prefers-color-scheme: dark) {
-      .box-rect { fill: #2C2C2A; stroke: #B4B2A9; }
-      .box-title { fill: #F1EFE8; }
-      .box-sub { fill: #D3D1C7; }
-      .hub-rect { fill: #712B13; stroke: #F0997B; }
-      .hub-title { fill: #FAECE7; }
-      .hub-sub { fill: #F5C4B3; }
-      .connector { stroke: #B4B2A9; }
-      .connector-arrow { marker-end: url(#arrow-dark); }
+      .box-rect { fill: #1F2937; stroke: #4B5563; }
+      .box-title { fill: #F3F4F6; }
+      .box-sub { fill: #9CA3AF; }
+      .hub-rect { fill: #1E3A5F; stroke: #93B4D9; }
+      .hub-title { fill: #DBE7F3; }
+      .hub-sub { fill: #93B4D9; }
+      .connector { stroke: #9CA3AF; }
     }
   </style>
 
-  <!-- Row 1: Agent/Client A (left)  ↔  Memory API / Router (right) -->
   <rect class="box-rect" x="40" y="40" width="260" height="72" rx="8" stroke-width="0.5"/>
   <text class="box-title" x="170" y="66" text-anchor="middle" dominant-baseline="central">Agent / Client A</text>
   <text class="box-sub" x="170" y="90" text-anchor="middle" dominant-baseline="central">AMSP consumer</text>
@@ -41,10 +38,8 @@
   <text class="hub-title" x="510" y="66" text-anchor="middle" dominant-baseline="central">Memory API / Router</text>
   <text class="hub-sub" x="510" y="90" text-anchor="middle" dominant-baseline="central">AMSP operations surface</text>
 
-  <!-- Bidirectional arrow between Agent and Router -->
   <line class="connector" x1="300" y1="76" x2="380" y2="76" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
 
-  <!-- Row 2: Local Working Store (left) | Durable Memory Store (right) -->
   <rect class="box-rect" x="40" y="160" width="260" height="72" rx="8" stroke-width="0.5"/>
   <text class="box-title" x="170" y="186" text-anchor="middle" dominant-baseline="central">Local working store</text>
   <text class="box-sub" x="170" y="210" text-anchor="middle" dominant-baseline="central">Session-scoped, agent-side</text>
@@ -53,23 +48,18 @@
   <text class="box-title" x="510" y="186" text-anchor="middle" dominant-baseline="central">Durable memory store</text>
   <text class="box-sub" x="510" y="210" text-anchor="middle" dominant-baseline="central">Persistent, governed</text>
 
-  <!-- Vertical connectors from Row 1 to Row 2 -->
   <line class="connector" x1="170" y1="112" x2="170" y2="160" marker-end="url(#arrow)"/>
   <line class="connector" x1="510" y1="112" x2="510" y2="160" marker-end="url(#arrow)"/>
 
-  <!-- Row 3: Index / Search / Embeddings (spanning right half, aligned with durable store) -->
   <rect class="box-rect" x="260" y="280" width="380" height="72" rx="8" stroke-width="0.5"/>
   <text class="box-title" x="450" y="306" text-anchor="middle" dominant-baseline="central">Index, search, embeddings</text>
   <text class="box-sub" x="450" y="330" text-anchor="middle" dominant-baseline="central">Retrieval, separated from storage</text>
 
-  <!-- Connector from Durable store down to Retrieval layer -->
   <line class="connector" x1="510" y1="232" x2="510" y2="280" marker-end="url(#arrow)"/>
 
-  <!-- Row 4: Policy / ACL / Audit Layer (full width, foundational) -->
   <rect class="box-rect" x="40" y="400" width="600" height="72" rx="8" stroke-width="0.5"/>
   <text class="box-title" x="340" y="426" text-anchor="middle" dominant-baseline="central">Policy, ACL, audit</text>
   <text class="box-sub" x="340" y="450" text-anchor="middle" dominant-baseline="central">Governance underpins every operation</text>
 
-  <!-- Connector from Retrieval layer to Governance layer -->
   <line class="connector" x1="450" y1="352" x2="450" y2="400" marker-end="url(#arrow)"/>
 </svg>
